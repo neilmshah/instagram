@@ -30,11 +30,12 @@ class LoginViewController: UIViewController {
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("Yay, created user")
+                self.createAlert(title: "Signup Successful", message: "Account created.")
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             } else {
                 print(error?.localizedDescription as Any)
                 if error?._code==202 {
-                    self.createAlert(title: "Instagram", message: "User already exists.")
+                    self.createAlert(title: "Sign up failed", message: "User already exists.")
                 }
             }
         }
@@ -45,10 +46,10 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user: PFUser?,error: Error?) in
             if user != nil {
                 print("Yay, you're logged in!")
-                
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             } else {
                 print(error?.localizedDescription as Any)
+                self.createAlert(title: "Login Failed", message: "User does not exist.")
             }
         }
     }
