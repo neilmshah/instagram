@@ -103,6 +103,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rDL-Zn-mP7" secondAttribute="bottom" constant="8" id="3om-lA-bCf"/>
                                                 <constraint firstItem="ifr-V0-vSf" firstAttribute="top" secondItem="VO5-ZF-Q08" secondAttribute="top" constant="8" id="KS7-a4-Nqp"/>
                                                 <constraint firstItem="rDL-Zn-mP7" firstAttribute="top" secondItem="ifr-V0-vSf" secondAttribute="bottom" constant="8" id="L0R-ef-dqH"/>
                                                 <constraint firstItem="ifr-V0-vSf" firstAttribute="leading" secondItem="VO5-ZF-Q08" secondAttribute="leading" constant="8" id="SAr-XQ-U1q"/>
@@ -157,13 +158,38 @@
                     <view key="view" contentMode="scaleToFill" id="UlG-Sb-Us5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKD-Ls-Epa">
+                                <rect key="frame" x="0.0" y="64" width="375" height="267"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Image Caption" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnO-Uj-PGc">
+                                <rect key="frame" x="8" y="339" width="351" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time stamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hq-D3-cWc">
+                                <rect key="frame" x="8" y="368" width="351" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1px-28-Hkl"/>
                     </view>
+                    <connections>
+                        <outlet property="captionLabel" destination="mnO-Uj-PGc" id="bJW-2u-ewm"/>
+                        <outlet property="detailImageView" destination="hKD-Ls-Epa" id="ri9-hn-u91"/>
+                        <outlet property="timeStampLabel" destination="6Hq-D3-cWc" id="NXO-hS-sPX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gO-JV-8d8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2729" y="422"/>
+            <point key="canvasLocation" x="2728.8000000000002" y="421.43928035982015"/>
         </scene>
         <!--New Post-->
         <scene sceneID="I3X-LG-s6u">
@@ -180,10 +206,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="kX5-1J-lSP">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="kX5-1J-lSP">
                                 <rect key="frame" x="16" y="77" width="343" height="255"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gJ4-rK-p15" appends="YES" id="wZu-iZ-kft"/>
+                                </connections>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a caption.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AIc-6J-LIq">
                                 <rect key="frame" x="16" y="340" width="343" height="30"/>
@@ -192,17 +221,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLg-iU-S20">
-                                <rect key="frame" x="119" y="575" width="137" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Select Photo"/>
-                                <connections>
-                                    <action selector="onSelectPhoto:" destination="FU5-i9-j4N" eventType="touchUpInside" id="1zF-a6-KSx"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="EKU-QX-dpd"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Post" id="ak6-eU-i8d">
@@ -225,6 +246,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWL-HV-GoP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="gJ4-rK-p15">
+                    <connections>
+                        <action selector="onTapPhoto:" destination="FU5-i9-j4N" id="mCB-m6-7Kb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2729" y="-723"/>
         </scene>

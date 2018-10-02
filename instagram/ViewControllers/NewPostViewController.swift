@@ -20,7 +20,7 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
     }
     
-    @IBAction func onSelectPhoto(_ sender: Any) {
+    @IBAction func onTapPhoto(_ sender: Any) {
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
@@ -36,7 +36,7 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // Delegate Protocols
     @objc func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                                     didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //let originalImage = info[.originalImage] as! UIImage
         let editedImage = info[.editedImage] as! UIImage
         photoSelectImageView.image = editedImage
@@ -66,6 +66,11 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) {(action) in}
         alertController.addAction((dismissAction))
         self.present(alertController, animated: true) { }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //let homeFeed = segue.destination as! InstagramViewController
+        //homeFeed.fetchPosts()
     }
     
 }

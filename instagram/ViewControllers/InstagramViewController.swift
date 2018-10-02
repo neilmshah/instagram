@@ -26,12 +26,10 @@ class InstagramViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
-        //tableView.rowHeight = UITableView.automaticDimension
-        //tableView.estimatedRowHeight = 250
-        tableView.rowHeight = 300
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
         
         fetchPosts()
-        tableView.reloadData()
     }
     
     @objc func fetchPosts() {
@@ -52,6 +50,7 @@ class InstagramViewController: UIViewController, UITableViewDelegate, UITableVie
                 print(error.debugDescription)
             }
         })
+        tableView.reloadData()
     }
     
     @IBAction func onLogout(_ sender: Any) {
@@ -86,12 +85,11 @@ class InstagramViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     //segue for detailView
-    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailView = segue.destination as! InstaDetailViewController
         if let cell = sender as? PostCell {
+            let detailView = segue.destination as! InstaDetailViewController
             detailView.post = posts[(cell.indexpath?.row)!]
         }
-    }*/
+    }
 
 }
