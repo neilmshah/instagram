@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MBProgressHUD
 
 class InstagramViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -33,6 +34,7 @@ class InstagramViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc func fetchPosts() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         let query = Post.query()
         query?.order(byDescending: "createdAt")
         query?.includeKey("author")
@@ -42,15 +44,17 @@ class InstagramViewController: UIViewController, UITableViewDelegate, UITableVie
         // Fetch data asynchronously
         query?.findObjectsInBackground(block: { (posts, error) in
             if let posts = posts {
+                //print("got new posts")
                 self.posts = posts as! [Post]
                 self.tableView.reloadData()
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.refreshControl.endRefreshing()
             }
             else {
                 print(error.debugDescription)
+                MBProgressHUD.hide(for: self.view, animated: true)
             }
         })
-        tableView.reloadData()
     }
     
     @IBAction func onLogout(_ sender: Any) {

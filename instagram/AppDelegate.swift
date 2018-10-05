@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if PFUser.current() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let instagramViewController = storyboard.instantiateViewController(withIdentifier: "navigationController")
+            let instagramViewController = storyboard.instantiateViewController(withIdentifier: "tabController")
             window?.rootViewController = instagramViewController
         }
         

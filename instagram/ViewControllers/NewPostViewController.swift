@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -47,18 +48,25 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func sharePhoto(_ sender: UIButton) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         let caption = captionTextField.text ?? ""
         let image = photoSelectImageView.image
         if (!photoSelected) {
+            MBProgressHUD.hide(for: self.view, animated: true)
             self.createAlert(title: "Photo not selected", message: "Please select a photo to share it.")
             return
         }
         Post.postUserImage(image: image, withCaption: caption) { (success, error) in
-            if (error != nil) {
-                print(error.debugDescription)
+            if success {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.performSegue(withIdentifier: "homeFeedSegue", sender: nil)
+            } else {
+                print(error?.localizedDescription)
+                MBProgressHUD.hide(for: self.view, animated: true)
             }
         }
-        self.performSegue(withIdentifier: "homeFeedSegue", sender: nil)
+        
     }
     
     func createAlert(title: String, message: String){
@@ -69,8 +77,9 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //let homeFeed = segue.destination as! InstagramViewController
-        //homeFeed.fetchPosts()
+        //let vc = segue.destination as! UINavigationController;
+        //let pVc = vc.viewControllers.first as! InstagramViewController
+        //pVc.fetchPosts()
     }
     
 }
